@@ -1,19 +1,20 @@
-# This workflow will build a package using Maven and then publish it to GitHub packages when a release is created
-# For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#apache-maven-with-a-settings-path
+[Oname: hellow-maven build action
 
-# ワークフローの名前を設定します
-name: Maven Package
-
-# このワークフローは、新しいリリースが作成されたときにトリガーされます
 on:
-  release:
-    types: [created]
+  push:
+    paths:
+      # 以下のディレクトリ以下の資産が修正された時のみ実行
+      - 'hellow-maven/**'
+
+defaults:
+  run:
+    working-directory: hellow-maven
 
 jobs:
   # "build"という名前のジョブを定義します
   build:
-    # このジョブは最新のUbuntu環境で実行されます
-    runs-on: ubuntu-latest
+    # このジョブはUbuntu22.04環境で実行されます
+    runs-on: ubuntu-22.04
     permissions:
       # このジョブには、リポジトリの内容を読む権限と、パッケージを書き込む権限があります
       contents: read
@@ -31,16 +32,14 @@ jobs:
         # 使用するJavaのディストリビューションを指定します。TemurinはEclipse Foundationが管理するOpenJDKのディストリビューションの一つです
         distribution: 'temurin'
         # Mavenのsettings.xmlファイル内で定義されているサーバーIDを指定します。このIDは、Mavenがパッケージをデプロイするリポジトリを識別するために使用されます
-        server-id: github 
-        # Mavenのsettings.xmlファイルの場所を指定します。${{ github.workspace }}はGitHub Actionsのワークスペースディレクトリを指します
-        settings-path: ${{ github.workspace }} 
 
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
-      run: mvn -B package --file pom.xml
-
-    - name: Publish to GitHub Packages Apache Maven
-      # 最後に、ビルドしたパッケージをGitHub Packagesに公開します。これには、GitHubのトークンが環境変数として設定されています
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
+      run: mvn -B -f pom.xml package install -DskipTests -o
+      run: ls
+#
+#    - name: Publish to GitHub Packages
+#      # ビルドしたパッケージをGitHub Packagesに公開
+#      run: mvn -B -f hellow-maven/pom.xml deploy -DskipTests --settings hellow-maven/settings.xml
+#      env:
+#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
