@@ -36,8 +36,9 @@ jobs:
 
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
-      run: mvn -B -f pom.xml package install -DskipTests -o
-      run: ls
+      run: | 
+        mvn -B -f pom.xml package install -DskipTests -o
+        ls
 #
 #    - name: Publish to GitHub Packages
 #      # ビルドしたパッケージをGitHub Packagesに公開
