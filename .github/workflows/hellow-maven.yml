@@ -1,5 +1,5 @@
 ---
-name: hellow-maven build action
+name: hello-maven build action
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 defaults:
   run:
-    working-directory: hellow-maven
+    working-directory: hello-maven
 
 jobs:
   # "build"という名前のジョブを定義します
@@ -41,6 +41,6 @@ jobs:
 #
 #    - name: Publish to GitHub Packages
 #      # ビルドしたパッケージをGitHub Packagesに公開
-#      run: mvn -B -f hellow-maven/pom.xml deploy -DskipTests --settings hellow-maven/settings.xml
+#      run: mvn -B -f hello-maven/pom.xml deploy -DskipTests --settings hello-maven/settings.xml
 #      env:
 #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
