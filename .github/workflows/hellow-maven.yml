@@ -5,7 +5,7 @@ on:
   push:
     paths:
       # 以下のディレクトリ以下の資産が修正された時のみ実行
-      - 'hellow-maven/**'
+      - 'hello-maven/**'
 
 defaults:
   run:
