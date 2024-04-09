@@ -38,7 +38,7 @@ jobs:
       # Mavenを使用してプロジェクトをビルドします
       run: | 
         mvn clean package
-
+        ls -l
 #
 #    - name: Publish to GitHub Packages
 #      # ビルドしたパッケージをGitHub Packagesに公開
