@@ -1,4 +1,5 @@
-[Oname: hellow-maven build action
+---
+name: hellow-maven build action
 
 on:
   push:
