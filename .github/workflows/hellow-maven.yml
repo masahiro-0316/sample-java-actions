@@ -43,6 +43,6 @@ jobs:
 
     - name: Publish to GitHub Packages
       # ビルドしたパッケージをGitHub Packagesに公開
-      run: mvn -B -f hello-maven/pom.xml deploy -DskipTests 
+      run: mvn -B -f pom.xml deploy -DskipTests 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
