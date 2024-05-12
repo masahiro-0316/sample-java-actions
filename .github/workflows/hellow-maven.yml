@@ -3,9 +3,9 @@ name: hello-maven build action
 
 on:
   push:
-    paths:
-      # 以下のディレクトリ以下の資産が修正された時のみ実行
-      - 'hello-maven/**'
+#    paths:
+#      # 以下のディレクトリ以下の資産が修正された時のみ実行
+#      - 'hello-maven/**'
 
 defaults:
   run:
@@ -40,9 +40,9 @@ jobs:
         mvn clean package
         ls -l
         java -classpath target/hello-maven-1.0.jar com.example.HelloWorld
-#
-#    - name: Publish to GitHub Packages
-#      # ビルドしたパッケージをGitHub Packagesに公開
-#      run: mvn -B -f hello-maven/pom.xml deploy -DskipTests --settings hello-maven/settings.xml
-#      env:
-#        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Publish to GitHub Packages
+      # ビルドしたパッケージをGitHub Packagesに公開
+      run: mvn -B -f hello-maven/pom.xml deploy -DskipTests --settings hello-maven/settings.xml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
