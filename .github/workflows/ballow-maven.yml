@@ -50,7 +50,7 @@ jobs:
     - name: check extenal repo
       # Mavenを使用してプロジェクトをビルドします
       run: | 
-        ls -l ${{ github.workspace }}
+        ls -l ${{ github.workspace }}/external-repo
  
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
