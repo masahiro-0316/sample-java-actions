@@ -1,0 +1,50 @@
+---
+name: hello-maven build action
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      # 以下のディレクトリ以下の資産が修正された時のみ実行
+      - 'hello-maven/**'
+
+defaults:
+  run:
+    working-directory: hello-maven
+
+jobs:
+  # "build"という名前のジョブを定義します
+  build:
+    # このジョブはUbuntu22.04環境で実行されます
+    runs-on: ubuntu-22.04
+    permissions:
+      # このジョブには、リポジトリの内容を読む権限と、パッケージを書き込む権限があります
+      contents: read
+      packages: write
+
+    steps:
+    # リポジトリのコードをチェックアウトします
+    - uses: actions/checkout@v3
+    - name: Set up JDK 17
+      # JDK 17をセットアップします。これは、Javaのコードをコンパイルするために必要です
+      uses: actions/setup-java@v3
+      with:
+        # 使用するJavaのバージョンを指定します。この場合、バージョン17が指定されています
+        java-version: '17'
+        # 使用するJavaのディストリビューションを指定します。TemurinはEclipse Foundationが管理するOpenJDKのディストリビューションの一つです
+        distribution: 'temurin'
+        # Mavenのsettings.xmlファイル内で定義されているサーバーIDを指定します。このIDは、Mavenがパッケージをデプロイするリポジトリを識別するために使用されます
+
+    - name: Build with Maven
+      # Mavenを使用してプロジェクトをビルドします
+      run: | 
+        mvn clean package
+        ls -l target/
+
+    - name: Publish to GitHub Packages
+      # ビルドしたパッケージをGitHub Packagesに公開
+      run: mvn -B -f pom.xml deploy -DskipTests 
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
