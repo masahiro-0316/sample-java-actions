@@ -39,7 +39,6 @@ jobs:
       run: |
         VERSION_EXISTS=$(mvn versions:display-dependency-updates | grep 'hello-maven' | grep 'Up-to-date' | wc -l)
         echo "VERSION_EXISTS=$VERSION_EXISTS" >> $GITHUB_ENV
-        echo $GITHUB_ENV
 
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
@@ -49,6 +48,7 @@ jobs:
         java -classpath target/hello-maven-1.0.jar com.example.HelloWorld
 
     - name: Publish to GitHub Packages
+      if: env.VERSION_EXISTS == 0
       # ビルドしたパッケージをGitHub Packagesに公開
       run: mvn -B -f pom.xml deploy -DskipTests 
       env:
