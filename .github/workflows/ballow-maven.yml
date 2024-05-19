@@ -36,7 +36,7 @@ jobs:
     - name: check extenal repo
       # Mavenを使用してプロジェクトをビルドします
       run: | 
-        ls -l ${HOME}/external-repo
+        ls -l 
         
     # リポジトリのコードをチェックアウトします
     - uses: actions/checkout@v3
