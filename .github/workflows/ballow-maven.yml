@@ -33,12 +33,7 @@ jobs:
         token: ${{ secrets.MYPTA }}  # プライベートリポジトリにアクセスするためのパーソナルアクセストークン
         path: external-repo  # チェックアウトしたコードを保存するディレクトリのパス
 
-    - name: check extenal repo
-      # Mavenを使用してプロジェクトをビルドします
-      run: | 
-        ls -l 
-        
-    # リポジトリのコードをチェックアウトします
+  # リポジトリのコードをチェックアウトします
     - uses: actions/checkout@v3
     - name: Set up JDK 18
       # JDK 17をセットアップします。これは、Javaのコードをコンパイルするために必要です
@@ -50,6 +45,11 @@ jobs:
         distribution: 'temurin'
         # Mavenのsettings.xmlファイル内で定義されているサーバーIDを指定します。このIDは、Mavenがパッケージをデプロイするリポジトリを識別するために使用されます
 
+    - name: check extenal repo
+      # Mavenを使用してプロジェクトをビルドします
+      run: | 
+        ls -l 
+ 
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
       run: | 
