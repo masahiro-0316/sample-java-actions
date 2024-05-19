@@ -28,7 +28,8 @@ jobs:
     - name: Checkout external repository
       uses: actions/checkout@v3
       with:
-        repository: owner/repo  # チェックアウトしたいリポジトリの所有者と名前を指定します
+        repository: masahiro-0316/delivery
+  # チェックアウトしたいリポジトリの所有者と名前を指定します
         token: ${{ secrets.MYPAT }}  # プライベートリポジトリにアクセスするためのパーソナルアクセストークン
         path: external-repo  # チェックアウトしたコードを保存するディレクトリのパス
 
@@ -49,6 +50,7 @@ jobs:
       run: | 
         mvn clean package
         ls -l target/
+        ls -l ${{ github.workspace }}/external-repo
 
     - name: Publish to GitHub Packages
       # ビルドしたパッケージをGitHub Packagesに公開
