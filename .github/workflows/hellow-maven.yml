@@ -34,6 +34,13 @@ jobs:
         distribution: 'temurin'
         # Mavenのsettings.xmlファイル内で定義されているサーバーIDを指定します。このIDは、Mavenがパッケージをデプロイするリポジトリを識別するために使用されます
 
+    - name: Check if version already exists
+      id: check_version
+      run: |
+        VERSION_EXISTS=$(mvn versions:display-dependency-updates | grep 'hello-maven' | grep 'Up-to-date' | wc -l)
+        echo "VERSION_EXISTS=$VERSION_EXISTS" >> $GITHUB_ENV
+        echo $GITHUB_ENV
+
     - name: Build with Maven
       # Mavenを使用してプロジェクトをビルドします
       run: | 
