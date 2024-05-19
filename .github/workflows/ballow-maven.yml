@@ -33,6 +33,11 @@ jobs:
         token: ${{ secrets.MYPTA }}  # プライベートリポジトリにアクセスするためのパーソナルアクセストークン
         path: external-repo  # チェックアウトしたコードを保存するディレクトリのパス
 
+    - name: check extenal repo
+      # Mavenを使用してプロジェクトをビルドします
+      run: | 
+        ls -l ${HOME}/external-repo
+        
     # リポジトリのコードをチェックアウトします
     - uses: actions/checkout@v3
     - name: Set up JDK 18
@@ -50,7 +55,6 @@ jobs:
       run: | 
         mvn clean package
         ls -l target/
-        ls -l ${{ github.workspace }}/external-repo
 
     - name: Publish to GitHub Packages
       # ビルドしたパッケージをGitHub Packagesに公開
