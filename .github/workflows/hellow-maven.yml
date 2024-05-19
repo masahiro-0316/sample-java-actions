@@ -1,14 +1,11 @@
 ---
 name: hello-maven build action
 
-on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    paths:
-      # 以下のディレクトリ以下の資産が修正された時のみ実行
-      - 'hello-maven/**'
+on: workflow_dispatch
+#  push:
+#    paths:
+#      # 以下のディレクトリ以下の資産が修正された時のみ実行
+#      - 'hello-maven/**'
 
 defaults:
   run:
