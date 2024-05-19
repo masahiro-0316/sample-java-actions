@@ -1,5 +1,5 @@
 ---
-name: ballo-maven build action
+name: ballow-maven build action
 
 on:
   workflow_dispatch:
@@ -8,11 +8,11 @@ on:
       - main
     paths:
       # 以下のディレクトリ以下の資産が修正された時のみ実行
-      - 'ballo-maven/**'
+      - 'ballow-maven/**'
 
 defaults:
   run:
-    working-directory: ballo-maven
+    working-directory: ballow-maven
 
 jobs:
   # "build"という名前のジョブを定義します
