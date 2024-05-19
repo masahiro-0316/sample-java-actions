@@ -38,8 +38,7 @@ jobs:
       # Mavenを使用してプロジェクトをビルドします
       run: | 
         mvn clean package
-        ls -l
-        java -classpath target/hello-maven-1.0.jar com.example.HelloWorld
+        ls -l target/
 
     - name: Publish to GitHub Packages
       # ビルドしたパッケージをGitHub Packagesに公開
